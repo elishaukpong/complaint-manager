@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Branch;
+use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class BranchSeeder extends Seeder
@@ -12,6 +14,28 @@ class BranchSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Branch::factory()
+            ->count(3)
+            ->state([
+                'organization_id' => Organization::first()
+            ])
+            ->create()
+            ->each(function(Branch $branch){
+                User::factory()
+                    ->state([
+                        'branch_id' => $branch->id
+                    ])
+                    ->create()
+                    ->each(fn(User $user) => $user->assignRole(data_get(config('permissions'), "manager.name")));
+
+                User::factory()
+                    ->customer()
+                    ->count(9)
+                    ->state([
+                        'branch_id' => $branch->id
+                    ])
+                    ->create()
+                    ->each(fn(User $user) => $user->assignRole(data_get(config('permissions'), "customer.name")));
+            });
     }
 }
