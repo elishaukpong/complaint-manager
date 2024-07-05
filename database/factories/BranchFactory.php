@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'email' => $this->faker->email,
+            'name' => $this->faker->name,
+            'address' => $this->faker->address,
+            'city' => $this->faker->city,
+            'state' => $this->faker->state,
+            'phone' => $this->faker->phoneNumber,
+            'organization_id' => Organization::factory()
         ];
     }
 }

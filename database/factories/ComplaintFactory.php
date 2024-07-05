@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,20 @@ class ComplaintFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'message' => $this->faker->paragraphs(5, true),
+            'reviewed' => now(),
+            'user_id' => User::factory(),
+            'branch_id' => Branch::factory(),
         ];
+    }
+
+    public function notReviewed(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'reviewed' => null,
+            ];
+        });
     }
 }

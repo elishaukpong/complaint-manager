@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('message');
-            $table->timestamp('reviewed');
+            $table->timestamp('reviewed')->nullable();
 
             $table->foreignId('user_id')
                 ->constrained()
