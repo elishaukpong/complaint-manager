@@ -30,6 +30,9 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
+
+            $table->unique(['email','branch_id']);
         });
     }
 
