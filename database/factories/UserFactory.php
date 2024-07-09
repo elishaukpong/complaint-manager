@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -13,11 +11,6 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -25,13 +18,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
+            'first_name' => $this->faker->name(),
+            'last_name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber,
-            'branch_id' => Branch::factory(),
-            'email_verified_at' => $this->faker->optional()->dateTime(),
-            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];
     }
@@ -41,9 +33,11 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
     }
 
     /**
@@ -51,11 +45,13 @@ class UserFactory extends Factory
      */
     public function customer(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'address' => $this->faker->address,
-            'city' => $this->faker->city,
-            'state' => $this->faker->state,
-            'profile_photo' => $this->faker->imageUrl(),
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'address' => $this->faker->address,
+                'city' => $this->faker->city,
+                'state' => $this->faker->word,
+                'profile_photo' => $this->faker->url
+            ];
+        });
     }
 }
