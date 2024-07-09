@@ -9,17 +9,34 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('branches.store') }}">
+                <form method="POST" action="{{ route('customers.store') }}">
                     @csrf
                     <div class="card-body">
+                        <div class="form-group">
+                            <label>Branch</label>
+                            <select name="branch_id" class="form-control">
+                                @foreach($branches as $branch)
+                                    <option value="{{$branch->id}}"> {{ $branch->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputText">First Name</label>
+                            <input type="text" class="form-control" id="exampleInputText" placeholder="Enter First Name" name="first_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputText">Last Name</label>
+                            <input type="text" class="form-control" id="exampleInputText" placeholder="Enter Last Name" name="last_name">
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email Address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email" name="email">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputText">Name</label>
-                            <input type="text" class="form-control" id="exampleInputText" placeholder="Enter Name" name="name">
+                            <label for="exampleInputPhone">Phone</label>
+                            <input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter Phone" name="phone">
                         </div>
 
                         <div class="form-group">
@@ -32,15 +49,14 @@
                             <input type="text" class="form-control" id="exampleInputCity" placeholder="Enter City" name="city">
                         </div>
 
-
                         <div class="form-group">
                             <label for="exampleInputState">State</label>
                             <input type="text" class="form-control" id="exampleInputState" placeholder="Enter State" name="state">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPhone">Phone</label>
-                            <input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter Phone" name="phone">
+                            <label for="exampleInputState">State</label>
+                            <input type="file" class="form-control" id="exampleInputState" placeholder="Enter State" name="profile_photo">
                         </div>
 
                     </div>

@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\BranchController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,8 @@ Route::middleware([
     Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
 
     Route::resource('branches', BranchController::class);
-    Route::resource('users', UserController::class);
+
+    Route::resource('users', CustomerController::class);
+    Route::resource('managers', ManagerController::class);
+    Route::resource('customers', CustomerController::class);
 });

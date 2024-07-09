@@ -35,27 +35,45 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
                         <p>
-                            Users
+                            Managers
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('users.create') }}" class="nav-link">
+                            <a href="{{ route('managers.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create Users</p>
+                                <p>Create </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/UI/icons.html" class="nav-link">
+                            <a href="{{ route('managers.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Managers</p>
+                                <p>List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tree"></i>
+                        <p>
+                            Customers
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('customers.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/UI/buttons.html" class="nav-link">
+                            <a href="{{ route('customers.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Customers</p>
+                                <p>List</p>
                             </a>
                         </li>
                     </ul>
