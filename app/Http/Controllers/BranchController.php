@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BranchesStoreRequest;
 use App\Models\Branch;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Yajra\DataTables\DataTables;
 
 class BranchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(): JsonResponse|View
     {
+        if(request()->ajax()){
+            return DataTables::of(Branch::latest()->get())
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make();
+        }
+
         return view('branches.index');
     }
 
