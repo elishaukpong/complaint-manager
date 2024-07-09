@@ -18,7 +18,18 @@ class BranchController extends Controller
     public function index(): JsonResponse|View
     {
         if(request()->ajax()){
-            return DataTables::of(Branch::latest()->get())
+            $data = Branch::with('manager')
+                ->withCount(['customers','complaints'])
+                ->latest()
+                ->get();
+
+            return DataTables::of($data)
+                ->addColumn('location', function($row) {
+                    return $row->full_address;
+                })
+                ->addColumn('manager', function($row) {
+                    return $row->manager->first_name ?? 'N/A';
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;

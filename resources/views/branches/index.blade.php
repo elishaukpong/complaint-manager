@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="row">
-        <div class="col-9  mt-4 mx-auto">
+        <div class="col-10  mt-4 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">All Branches</h3>
@@ -11,7 +11,10 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Manager's Name</th>
+                                <th>Customer Count</th>
+                                <th>Complaint Count</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,13 +32,16 @@
     @push('scripts')
         <script type="text/javascript">
             $(function () {
-                var table = $('#myTable').DataTable({
+                $('#myTable').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('branches.index') }}",
                     columns: [
                         {data: 'name', name: 'name'},
-                        {data: 'phone', name: 'phone'},
+                        {data: 'location', name: 'location'},
+                        {data: 'manager', name: 'manager'},
+                        {data: 'customers_count', name: 'customer'},
+                        {data: 'complaints_count', name: 'complaint'},
                         {data: 'action', name: 'action'},
                     ]
                 });

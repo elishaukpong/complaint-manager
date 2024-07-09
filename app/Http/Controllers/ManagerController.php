@@ -5,15 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateManagerRequest;
 use App\Models\Branch;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Yajra\DataTables\DataTables;
 
 class ManagerController extends Controller
 {
-    public function index(): View
+    public function index(): JsonResponse|View
     {
+        if(request()->ajax()){
+            $data = User::managers()
+                ->latest()
+                ->get();
+
+            return DataTables::of($data)
+                ->addColumn('name', function($row) {
+                    return $row->full_name ;
+                })
+                ->addColumn('branch', function($row) {
+                    return $row->branch->name ?? 'N/A';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make();
+        }
+
         return view('managers.index');
     }
 
