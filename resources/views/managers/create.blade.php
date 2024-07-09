@@ -5,11 +5,11 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create Customer</h3>
+                    <h3 class="card-title">Create Manager</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('customers.store') }}">
+                <form method="POST" action="{{ route('managers.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -38,27 +38,6 @@
                             <label for="exampleInputPhone">Phone</label>
                             <input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter Phone" name="phone">
                         </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputAddress">Address</label>
-                            <input type="text" class="form-control" id="exampleInputAddress" placeholder="Enter Address" name="address">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputCity">City</label>
-                            <input type="text" class="form-control" id="exampleInputCity" placeholder="Enter City" name="city">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputState">State</label>
-                            <input type="text" class="form-control" id="exampleInputState" placeholder="Enter State" name="state">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputState">Photo</label>
-                            <input type="file" class="form-control" id="exampleInputState" placeholder="Enter State" name="profile_photo">
-                        </div>
-
                     </div>
                     <!-- /.card-body -->
 
