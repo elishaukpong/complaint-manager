@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BranchesStoreRequest;
 use App\Models\Branch;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -27,9 +29,14 @@ class BranchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BranchesStoreRequest $request): RedirectResponse
     {
-        //
+        Branch::create([
+            ...$request->validated(),
+            'organization_id' => auth()->user()->branch->organization->id
+        ]);
+
+        return redirect()->route('branches.index')->with('success', 'Branch Created!');
     }
 
     /**
