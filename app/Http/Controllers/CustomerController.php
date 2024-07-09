@@ -21,6 +21,7 @@ class CustomerController extends Controller
     {
         if(request()->ajax()){
             $data = User::customers()
+                ->withCount('complaints')
                 ->latest()
                 ->get();
 
